@@ -71,6 +71,96 @@ Eğitim çıktı klasörleri (Ultralytics):
 
 ---
 
+## 📊 Deneysel Sonuçlar
+
+Bu bölümde, MiDeSeC + ICPR14 birleşik veri seti üzerinde eğitilen **YOLOv8n-seg** modelinin **nicel (quantitative)** ve **nitel (qualitative)** sonuçları sunulmaktadır.
+
+---
+
+### 🔹 Test Seti – Nicel Sonuçlar
+
+#### Nesne Tespiti (Bounding Box)
+
+| Metric | Değer |
+|------|------:|
+| Precision (P) | **0.692** |
+| Recall (R) | **0.818** |
+| mAP@50 | **0.683** |
+| mAP@50–95 | **0.609** |
+
+---
+
+#### Segmentasyon (Mask)
+
+| Metric | Değer |
+|------|------:|
+| Precision (P) | **0.692** |
+| Recall (R) | **0.818** |
+| mAP@50 | **0.683** |
+| mAP@50–95 | **0.535** |
+
+---
+
+#### En İyi F1 Skoru (Confidence Taraması)
+
+| Ölçüt | Değer |
+|------|------:|
+| **Best F1 Score** | **0.7667** |
+| **Optimal Confidence Threshold** | **0.33** |
+
+Bu eşik değeri, precision–recall dengesi açısından en uygun nokta olarak belirlenmiştir.
+
+---
+
+#### Alternatif Test Değerlendirmesi (İlk Değerlendirme)
+
+| Metric | Box | Mask |
+|------|------:|------:|
+| Precision | 0.651 | 0.651 |
+| Recall | 0.905 | 0.905 |
+| mAP@50 | 0.723 | 0.723 |
+| mAP@50–95 | 0.635 | 0.531 |
+
+---
+
+### 🔹 Nitel Sonuçlar (Görsel Karşılaştırmalar)
+
+Aşağıda, test setinden seçilen örnek görüntüler üzerinde **orijinal görüntüler** ile **model tahminlerinin (overlay)** karşılaştırmaları sunulmaktadır.  
+Model, özellikle hücresel yapıların lokalizasyonunda yüksek güven skorları ile başarılı tespitler gerçekleştirmiştir.
+
+#### Örnek–1
+<p align="center">
+  <img src="assets/original_mid_P00_00.jpg" width="45%" />
+  <img src="assets/pred_overlay_mid_P00_00.jpg" width="45%" />
+</p>
+<p align="center"><em>Sol: Orijinal görüntü — Sağ: Model tahmini (confidence ≈ 0.87–0.97)</em></p>
+
+---
+
+#### Örnek–2
+<p align="center">
+  <img src="assets/original_mid_P00_01.jpg" width="45%" />
+  <img src="assets/pred_overlay_mid_P00_01.jpg" width="45%" />
+</p>
+<p align="center"><em>Sol: Orijinal görüntü — Sağ: Model tahmini (confidence ≈ 0.76–0.91)</em></p>
+
+---
+
+### 📝 Akademik Değerlendirme
+
+Model, test seti üzerinde **yüksek recall değerleri** ile özellikle hedef nesneleri kaçırmama konusunda güçlü bir performans sergilemiştir.  
+Bounding box ve mask sonuçları karşılaştırıldığında, **segmentasyon mAP@50–95** değerinin daha düşük olması, piksel-seviyesinde sınır belirlemenin daha zor bir problem olduğunu göstermektedir.
+
+Nitel sonuçlar incelendiğinde, modelin:
+- Hücresel yapıları doğru bölgelerde lokalize ettiği,
+- Yüksek confidence değerleri ürettiği,
+- Düşük confidence’lı tahminlerin genellikle sınır belirsizliği olan bölgelerde oluştuğu  
+gözlemlenmiştir.
+
+Bu bulgular, önerilen yaklaşımın histopatolojik görüntüler üzerinde **güvenilir ve genellenebilir** bir segmentasyon performansı sunduğunu göstermektedir.
+
+---
+
 ## Kurulum
 ### Ortam
 - Python >= 3.8 (öneri: 3.10+)
